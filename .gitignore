@@ -1,0 +1,5 @@
+.env
+.env.local
+main
+migrate.log
+.vscode
