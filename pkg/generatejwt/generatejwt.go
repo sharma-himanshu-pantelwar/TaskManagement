@@ -50,3 +50,17 @@ func GenerateSession(userId int) (session.Session, error) {
 	}
 	return session, nil
 }
+
+func ValidateJWT(tokenString string, jwtKey string) (*Claims, error) {
+	var claims Claims
+	token, err := jwt.ParseWithClaims(tokenString, &claims, func(token *jwt.Token) (interface{}, error) {
+		return []byte(jwtKey), nil
+	})
+	if err != nil {
+		return nil, err
+	}
+	if !token.Valid {
+		return nil, err
+	}
+	return &claims, nil
+}
