@@ -28,3 +28,13 @@ func (u UserRepo) CreateUser(user users.User) (users.User, error) {
 
 	return user, nil
 }
+
+func (u UserRepo) FindUserByUsername(username string) (users.User, error) {
+	var user users.User
+	query := "SELECT ID, USERNAME, PASSWORD FROM USERS WHERE USERNAME=$1;"
+	err := u.db.db.QueryRow(query, username).Scan(&user.Id, &user.Username, &user.Password)
+	if err != nil {
+		return users.User{}, err
+	}
+	return user, nil
+}

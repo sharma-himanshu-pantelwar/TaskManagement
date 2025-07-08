@@ -45,9 +45,10 @@ func main() {
 
 	//repos
 	userRepo := persistance.NewUserRepo(database)
+	sessionRepo := persistance.NewSessionRepo(database)
 
 	//services
-	userService := usecase.NewUserService(userRepo)
+	userService := usecase.NewUserService(userRepo, sessionRepo, configurations.JWT_SECRET)
 
 	// handler
 	userHandler := handler.NewUserHandler(configurations, userService)

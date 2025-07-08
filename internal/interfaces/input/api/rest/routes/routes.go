@@ -19,7 +19,8 @@ func InitRoutes(userHandler *handler.UserHandler) http.Handler {
 		AllowCredentials: true,
 	}))
 	router.Route("/v1/users", func(r chi.Router) {
-		r.Post("/", userHandler.RegisterUserHandler)
+		r.Post("/register", userHandler.RegisterUserHandler)
+		r.Post("/login", userHandler.LoginUserHandler)
 	})
 
 	return router

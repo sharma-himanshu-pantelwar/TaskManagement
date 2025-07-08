@@ -1,0 +1,19 @@
+syntax="proto3";
+
+package user;
+
+option go_package="taskmgmtsystem/internal/gen/userpb";
+
+service UserService{
+    rpc RegisterUser(RegisterUserRequest)returns (RegisterUserResponse);
+}
+
+message RegisterUserRequest{
+    string username=1;
+    string password=2;
+}
+message RegisterUserResponse{
+    int64 id=1;
+    string username=2;
+    string message=3;
+}

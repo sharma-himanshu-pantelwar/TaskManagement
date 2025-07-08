@@ -1,3 +1,6 @@
+# github.com/dgrijalva/jwt-go v3.2.0+incompatible
+## explicit
+github.com/dgrijalva/jwt-go
 # github.com/fsnotify/fsnotify v1.8.0
 ## explicit; go 1.17
 github.com/fsnotify/fsnotify
@@ -12,6 +15,9 @@ github.com/go-chi/cors
 ## explicit; go 1.18
 github.com/go-viper/mapstructure/v2
 github.com/go-viper/mapstructure/v2/internal/errors
+# github.com/google/uuid v1.6.0
+## explicit
+github.com/google/uuid
 # github.com/lib/pq v1.10.9
 ## explicit; go 1.13
 github.com/lib/pq

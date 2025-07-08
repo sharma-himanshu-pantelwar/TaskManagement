@@ -16,6 +16,7 @@ type Config struct {
 	DB_SSLMODE  string `mapstructure:"DB_SSLMODE"`
 	APP_ENV     string `mapstructure:"APP_ENV"`
 	APP_PORT    string `mapstructure:"APP_PORT"`
+	JWT_SECRET  string `mapstructure:"JWT_SECRET"`
 }
 
 func LoadConfig() (*Config, error) {
