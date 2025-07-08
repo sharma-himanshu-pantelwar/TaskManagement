@@ -3,6 +3,7 @@ package handler
 import (
 	"encoding/json"
 	"net/http"
+	"time"
 
 	"taskmgmtsystem/internal/config"
 	"taskmgmtsystem/internal/core/users"
@@ -154,4 +155,62 @@ func (uh UserHandler) GetProfileHandler(w http.ResponseWriter, r *http.Request) 
 	}
 	response.Set()
 
+}
+
+func (uh UserHandler) LogoutHandler(w http.ResponseWriter, r *http.Request) {
+	userId, ok := r.Context().Value("user").(int)
+	if !ok {
+		response := response.Response{
+			ResponseWriter: w,
+			StatusCode:     http.StatusUnauthorized,
+			Error:          "user not found in context",
+		}
+		response.Set()
+		return
+	}
+	err := uh.userService.LogoutUser(userId)
+	if err != nil {
+		response := response.Response{
+			ResponseWriter: w,
+			StatusCode:     http.StatusInternalServerError,
+			Error:          err.Error(),
+		}
+		response.Set()
+		return
+	}
+
+	//at and sess
+
+	accessTokenCookie := http.Cookie{
+		Name:     "at",
+		Value:    "",
+		Expires:  time.Now(),
+		Secure:   true,
+		SameSite: http.SameSiteNoneMode,
+		HttpOnly: true,
+		Path:     "/",
+	}
+
+	sessionCookie := http.Cookie{
+		Name:     "sess",
+		Value:    "",
+		Expires:  time.Now(),
+		Secure:   true,
+		SameSite: http.SameSiteNoneMode,
+		HttpOnly: true,
+		Path:     "/",
+	}
+
+	http.SetCookie(w, &accessTokenCookie)
+	http.SetCookie(w, &sessionCookie)
+
+	response := response.Response{
+		ResponseWriter: w,
+		StatusCode:     http.StatusOK,
+		Headers: map[string]string{
+			"Content-Type": "application/json",
+		},
+		Message: "Logged out succesfully",
+	}
+	response.Set()
 }

@@ -31,4 +31,5 @@ type UserServiceImpl interface {
 	CreateUser(user User) (User, error)
 	LoginUser(user User, config *config.Config) (LoginResponse, error)
 	GetUserById(userId int) (UserProfile, error)
+	LogoutUser(userId int) error
 }

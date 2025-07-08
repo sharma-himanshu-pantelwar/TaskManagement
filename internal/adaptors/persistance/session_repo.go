@@ -25,3 +25,14 @@ func (u SessionRepo) CreateSession(session session.Session) error {
 	}
 	return nil
 }
+
+func (u SessionRepo) DeleteSession(userId int) error {
+	query := "DELETE FROM SESSIONS WHERE userid=$1"
+
+	_, err := u.db.db.Query(query, userId)
+	if err != nil {
+		return err
+	}
+
+	return nil
+}

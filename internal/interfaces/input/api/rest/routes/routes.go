@@ -26,6 +26,7 @@ func InitRoutes(userHandler *handler.UserHandler, jwtkey string) http.Handler {
 		r.Group(func(protected chi.Router) {
 			protected.Use(middleware.Authenticate(jwtkey))
 			protected.Get("/", userHandler.GetProfileHandler)
+			protected.Post("/logout", userHandler.LogoutHandler)
 		})
 	})
 

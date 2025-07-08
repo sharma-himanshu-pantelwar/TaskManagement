@@ -16,4 +16,5 @@ type Session struct {
 
 type SessionRepoImpl interface {
 	CreateSession(session Session) error
+	DeleteSession(userId int) error
 }

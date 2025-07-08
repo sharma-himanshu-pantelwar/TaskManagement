@@ -75,3 +75,12 @@ func (us UserService) GetUserById(userId int) (users.UserProfile, error) {
 	}
 	return user, nil
 }
+
+func (us UserService) LogoutUser(userId int) error {
+	err := us.sessionRepo.DeleteSession(userId)
+	if err != nil {
+		return fmt.Errorf("failed to logout user, please try again later")
+	}
+
+	return nil
+}
