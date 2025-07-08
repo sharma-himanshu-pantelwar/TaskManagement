@@ -2,10 +2,21 @@
 ## explicit; go 1.17
 github.com/fsnotify/fsnotify
 github.com/fsnotify/fsnotify/internal
+# github.com/go-chi/chi/v5 v5.2.2
+## explicit; go 1.20
+github.com/go-chi/chi/v5
+# github.com/go-chi/cors v1.2.2
+## explicit; go 1.14
+github.com/go-chi/cors
 # github.com/go-viper/mapstructure/v2 v2.2.1
 ## explicit; go 1.18
 github.com/go-viper/mapstructure/v2
 github.com/go-viper/mapstructure/v2/internal/errors
+# github.com/lib/pq v1.10.9
+## explicit; go 1.13
+github.com/lib/pq
+github.com/lib/pq/oid
+github.com/lib/pq/scram
 # github.com/pelletier/go-toml/v2 v2.2.3
 ## explicit; go 1.21.0
 github.com/pelletier/go-toml/v2
@@ -50,6 +61,10 @@ go.uber.org/atomic
 # go.uber.org/multierr v1.9.0
 ## explicit; go 1.19
 go.uber.org/multierr
+# golang.org/x/crypto v0.32.0
+## explicit; go 1.20
+golang.org/x/crypto/bcrypt
+golang.org/x/crypto/blowfish
 # golang.org/x/sys v0.29.0
 ## explicit; go 1.18
 golang.org/x/sys/unix

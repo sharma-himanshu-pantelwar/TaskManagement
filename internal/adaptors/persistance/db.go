@@ -4,6 +4,8 @@ import (
 	"database/sql"
 	"fmt"
 	"taskmgmtsystem/internal/config"
+
+	_ "github.com/lib/pq"
 )
 
 type Database struct {
