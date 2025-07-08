@@ -10,7 +10,7 @@ import (
 func Authenticate(jwtKey string) func(http.Handler) http.Handler {
 	return func(next http.Handler) http.Handler {
 		return http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
-			cookie, err := r.Cookie("accessToken")
+			cookie, err := r.Cookie("at")
 			if err != nil {
 				http.Error(w, "Missing access token", http.StatusUnauthorized)
 				return

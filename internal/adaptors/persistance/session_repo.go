@@ -1,6 +1,6 @@
 package persistance
 
-import "taskmgmtsystem/internal/core/users/session"
+import "taskmgmtsystem/internal/core/session"
 
 type SessionRepo struct {
 	db *Database

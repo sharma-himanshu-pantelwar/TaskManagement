@@ -2,7 +2,7 @@ package users
 
 import (
 	"taskmgmtsystem/internal/config"
-	"taskmgmtsystem/internal/core/users/session"
+	"taskmgmtsystem/internal/core/session"
 	"time"
 )
 
@@ -24,9 +24,11 @@ type LoginResponse struct {
 type UserRepoImpl interface {
 	CreateUser(user User) (User, error)
 	FindUserByUsername(username string) (User, error)
+	FindUserById(id int) (UserProfile, error)
 }
 
 type UserServiceImpl interface {
 	CreateUser(user User) (User, error)
 	LoginUser(user User, config *config.Config) (LoginResponse, error)
+	GetUserById(userId int) (UserProfile, error)
 }

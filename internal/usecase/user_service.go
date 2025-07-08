@@ -5,8 +5,8 @@ import (
 	"fmt"
 
 	"taskmgmtsystem/internal/config"
+	"taskmgmtsystem/internal/core/session"
 	"taskmgmtsystem/internal/core/users"
-	"taskmgmtsystem/internal/core/users/session"
 	"taskmgmtsystem/pkg/generatejwt"
 	"taskmgmtsystem/pkg/hashpassword"
 )
@@ -66,4 +66,12 @@ func (us UserService) LoginUser(user users.User, config *config.Config) (users.L
 	loginResponse.Session = session
 
 	return loginResponse, nil
+}
+
+func (us UserService) GetUserById(userId int) (users.UserProfile, error) {
+	user, err := us.userRepo.FindUserById(userId)
+	if err != nil {
+		return user, fmt.Errorf("can't get user try again later")
+	}
+	return user, nil
 }

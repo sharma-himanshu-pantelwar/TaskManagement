@@ -119,3 +119,39 @@ func (uh UserHandler) LoginUserHandler(w http.ResponseWriter, r *http.Request) {
 
 	response.Set()
 }
+
+func (uh UserHandler) GetProfileHandler(w http.ResponseWriter, r *http.Request) {
+	userId, ok := r.Context().Value("user").(int)
+	if !ok {
+		response := response.Response{
+			ResponseWriter: w,
+			StatusCode:     http.StatusUnauthorized,
+			Error:          "user not found in context",
+		}
+		response.Set()
+		return
+	}
+
+	// fetch user profile from id
+	user, err := uh.userService.GetUserById(userId)
+	if err != nil {
+		response := response.Response{
+			ResponseWriter: w,
+			StatusCode:     http.StatusInternalServerError,
+			Error:          err.Error(),
+		}
+		response.Set()
+		return
+	}
+	response := response.Response{
+		ResponseWriter: w,
+		StatusCode:     http.StatusOK,
+		Headers: map[string]string{
+			"Content-Type": "application/json",
+			"x-user":       user.Username,
+		},
+		Data: user,
+	}
+	response.Set()
+
+}

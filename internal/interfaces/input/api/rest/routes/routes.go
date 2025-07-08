@@ -3,12 +3,13 @@ package routes
 import (
 	"net/http"
 	"taskmgmtsystem/internal/interfaces/input/api/rest/handler"
+	"taskmgmtsystem/internal/interfaces/input/api/rest/middleware"
 
 	"github.com/go-chi/chi/v5"
 	"github.com/go-chi/cors"
 )
 
-func InitRoutes(userHandler *handler.UserHandler) http.Handler {
+func InitRoutes(userHandler *handler.UserHandler, jwtkey string) http.Handler {
 
 	router := chi.NewRouter()
 	router.Use(cors.Handler(cors.Options{
@@ -21,6 +22,11 @@ func InitRoutes(userHandler *handler.UserHandler) http.Handler {
 	router.Route("/v1/users", func(r chi.Router) {
 		r.Post("/register", userHandler.RegisterUserHandler)
 		r.Post("/login", userHandler.LoginUserHandler)
+
+		r.Group(func(protected chi.Router) {
+			protected.Use(middleware.Authenticate(jwtkey))
+			protected.Get("/", userHandler.GetProfileHandler)
+		})
 	})
 
 	return router

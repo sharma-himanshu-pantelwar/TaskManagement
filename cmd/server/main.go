@@ -53,7 +53,7 @@ func main() {
 	// handler
 	userHandler := handler.NewUserHandler(configurations, userService)
 
-	router := routes.InitRoutes(&userHandler)
+	router := routes.InitRoutes(&userHandler, configurations.JWT_SECRET)
 
 	err = http.ListenAndServe(fmt.Sprintf(":%s", configurations.APP_PORT), router)
 	if err != nil {

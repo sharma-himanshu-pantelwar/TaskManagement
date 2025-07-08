@@ -1,7 +1,7 @@
 package generatejwt
 
 import (
-	"taskmgmtsystem/internal/core/users/session"
+	"taskmgmtsystem/internal/core/session"
 	"time"
 
 	"github.com/dgrijalva/jwt-go"

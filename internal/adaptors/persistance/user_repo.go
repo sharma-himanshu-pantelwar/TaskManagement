@@ -38,3 +38,12 @@ func (u UserRepo) FindUserByUsername(username string) (users.User, error) {
 	}
 	return user, nil
 }
+func (u UserRepo) FindUserById(id int) (users.UserProfile, error) {
+	var user users.UserProfile
+	query := "SELECT ID, USERNAME FROM USERS WHERE ID=$1;"
+	err := u.db.db.QueryRow(query, id).Scan(&user.Id, &user.Username)
+	if err != nil {
+		return users.UserProfile{}, err
+	}
+	return user, nil
+}
